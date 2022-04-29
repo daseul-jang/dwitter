@@ -1,11 +1,4 @@
-import { authService } from "fbase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  GithubAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+import { authService } from "firebaseService/fbauth";
 import { useState } from "react";
 
 function Auth() {
@@ -24,21 +17,14 @@ function Auth() {
   };
   const onSubmit = async (event) => {
     event.preventDefault();
-    console.log("서브밋");
     try {
       let data;
       if (newAccount) {
         // 계정 생성
-        //data = await authService.createUser(authService.auth, email, password);
-        data = await createUserWithEmailAndPassword(
-          authService,
-          email,
-          password
-        );
+        data = await authService.createUser(email, password);
       } else {
         // 로그인
-        //data = await authService.signIn(authService.auth, email, password);
-        data = await signInWithEmailAndPassword(authService, email, password);
+        data = await authService.signIn(email, password);
       }
       console.log(data);
     } catch (error) {
@@ -48,16 +34,9 @@ function Auth() {
   };
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
-  const onSocialClick = async (event) => {
+  const onSocialClick = (event) => {
     const { name } = event.target;
-    let provider;
-
-    if (name === "google") {
-      provider = new GoogleAuthProvider();
-    } else if (name === "github") {
-      provider = new GithubAuthProvider();
-    }
-    await signInWithPopup(authService, provider);
+    authService.socialLogin(name);
   };
 
   return (
