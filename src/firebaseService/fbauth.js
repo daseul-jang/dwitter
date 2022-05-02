@@ -27,7 +27,7 @@ const signIn = (email, pass) => {
   return signInWithEmailAndPassword(auth, email, pass);
 };
 
-const socialLogin = async (name) => {
+const socialLogin = (name) => {
   let provider;
 
   if (name === "google") {
@@ -35,7 +35,7 @@ const socialLogin = async (name) => {
   } else if (name === "github") {
     provider = new GithubAuthProvider();
   }
-  await signInWithPopup(auth, provider);
+  return signInWithPopup(auth, provider);
 };
 
 const logOut = () => {

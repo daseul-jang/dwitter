@@ -14,36 +14,34 @@ import {
 const db = getFirestore(app);
 
 const dweetList = (setDweets) => {
-  const q = query(collection(db, "dweets"), orderBy("createAt", "desc"));
+  const q = query(collection(db, "dweets"), orderBy("createdAt", "desc"));
   onSnapshot(q, (snapshot) => {
-    const dweetArr = snapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-    console.log(dweetArr);
+    const dweetArr = snapshot.docs.map((doc) => {
+      return {
+        id: doc.id,
+        ...doc.data(),
+      };
+    });
     setDweets(dweetArr);
   });
 };
 
-const addDweet = async (dweet, userObj) => {
+const addDweet = (dweetObj) => {
   try {
-    const docRef = await addDoc(collection(db, "dweets"), {
-      text: dweet,
-      createAt: Date.now(),
-      creatorId: userObj.uid,
-    });
+    const docRef = addDoc(collection(db, "dweets"), dweetObj);
     console.log(`Document written with ID : ${docRef.id}`);
+    return docRef;
   } catch (error) {
     console.log(`Error adding document : ${error}`);
   }
 };
 
-const delDweet = async (id) => {
-  await deleteDoc(doc(db, "dweets", `${id}`));
+const delDweet = (uid) => {
+  return deleteDoc(doc(db, "dweets", `${uid}`));
 };
 
-const editDweet = async (id, newDweet) => {
-  await updateDoc(doc(db, "dweets", `${id}`), {
+const editDweet = (uid, newDweet) => {
+  return updateDoc(doc(db, "dweets", `${uid}`), {
     text: newDweet,
   });
 };

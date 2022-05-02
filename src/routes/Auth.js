@@ -34,9 +34,9 @@ function Auth() {
   };
 
   const toggleAccount = () => setNewAccount((prev) => !prev);
-  const onSocialClick = (event) => {
+  const onSocialClick = async (event) => {
     const { name } = event.target;
-    authService.socialLogin(name);
+    await authService.socialLogin(name);
   };
 
   return (

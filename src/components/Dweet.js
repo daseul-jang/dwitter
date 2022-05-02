@@ -1,23 +1,26 @@
+import { storageService } from "firebaseService/fbstorage";
 import { dbService } from "firebaseService/fbstore";
 import { useState } from "react";
 
 function Dweet({ dweetObj, isOwner }) {
   const [edit, setEdit] = useState(false);
   const [newDw, setNewDw] = useState(dweetObj.text);
-  const onDeleteClick = () => {
+  const onDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠어요?");
 
     if (ok) {
-      dbService.delDweet(dweetObj.id);
+      await dbService.delDweet(dweetObj.id);
+      dweetObj.attachmentUrl &&
+        (await storageService.deleteFile(dweetObj.attachmentUrl));
     }
   };
 
   const toggleEdit = () => setEdit((prev) => !prev);
   const onEditChange = (event) => setNewDw(event.target.value);
-  const onEditSubmit = (event) => {
+  const onEditSubmit = async (event) => {
     event.preventDefault();
 
-    dbService.editDweet(dweetObj.id, newDw);
+    await dbService.editDweet(dweetObj.id, newDw);
     setEdit(false);
   };
 
@@ -43,6 +46,14 @@ function Dweet({ dweetObj, isOwner }) {
       ) : (
         <>
           <h4>{dweetObj.text}</h4>
+          {dweetObj.attachmentUrl && (
+            <img
+              src={dweetObj.attachmentUrl}
+              width="100px"
+              height="100px"
+              alt={dweetObj.createdAt}
+            />
+          )}
           {isOwner && (
             <>
               <button onClick={toggleEdit}>수정</button>
