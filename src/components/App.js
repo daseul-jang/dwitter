@@ -26,6 +26,7 @@ function App() {
           isLoggedIn={Boolean(userObj)}
           userObj={userObj}
           refreshUser={refreshUser}
+          init={init}
         />
       ) : (
         "Initializing..."

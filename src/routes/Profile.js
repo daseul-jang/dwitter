@@ -2,13 +2,12 @@ import Dweet from "components/Dweet";
 import { authService } from "firebaseService/fbauth";
 import { dbService } from "firebaseService/fbstore";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Profile({ userObj, refreshUser }) {
   const [newDisName, setNewDisName] = useState(userObj.displayName);
   const [myDweets, setMyDweets] = useState([]);
   const navgate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     dbService.myDweets(userObj.uid, setMyDweets);
@@ -28,8 +27,6 @@ function Profile({ userObj, refreshUser }) {
     authService.logOut();
     navgate("/");
   };
-
-  console.log(location.pathname);
 
   return (
     <>

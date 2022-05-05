@@ -15,13 +15,18 @@ const auth = getAuth(app);
 
 const authStateChanged = (setUserObj, setIsInit) => {
   onAuthStateChanged(auth, (user) => {
-    console.log(user);
-    user
-      ? setUserObj({
-          displayName: user.displayName,
-          uid: user.uid,
-        })
-      : setUserObj(null);
+    if (user) {
+      const index = user.email.indexOf("@");
+      const name = user.email.substring(0, index);
+
+      setUserObj({
+        displayName: user.displayName ?? name,
+        uid: user.uid,
+      });
+    } else {
+      setUserObj(null);
+    }
+
     setIsInit(true);
   });
 };
