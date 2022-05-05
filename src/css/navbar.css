@@ -1,0 +1,19 @@
+/* Navbar */
+
+.nav__ul {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.nav__link {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.nav__link span {
+  margin-top: 10px;
+}

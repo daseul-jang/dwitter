@@ -1,5 +1,6 @@
 import { authService } from "firebaseService/fbauth";
 import { useState } from "react";
+import "css/authForm.css";
 
 function AturhForm() {
   const [email, setEmail] = useState("");
@@ -38,8 +39,9 @@ function AturhForm() {
 
   return (
     <>
-      <form onSubmit={onSubmit}>
+      <form className="container" onSubmit={onSubmit}>
         <input
+          className="authInput"
           type="email"
           name="email"
           value={email}
@@ -48,6 +50,7 @@ function AturhForm() {
           required
         />
         <input
+          className="authInput"
           type="password"
           name="password"
           value={password}
@@ -55,10 +58,16 @@ function AturhForm() {
           onChange={onChange}
           required
         />
-        <input type="submit" value={newAccount ? "가입하기" : "로그인"} />
-        {error}
+        <input
+          className="authInput authSubmit"
+          type="submit"
+          value={newAccount ? "가입하기" : "로그인"}
+        />
+        {error && <span className="authError">{error}</span>}
       </form>
-      <span onClick={toggleAccount}>{newAccount ? "로그인" : "가입하기"}</span>
+      <span className="authSwitch" onClick={toggleAccount}>
+        {newAccount ? "로그인" : "가입하기"}
+      </span>
     </>
   );
 }

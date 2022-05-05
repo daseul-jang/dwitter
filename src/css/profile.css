@@ -1,0 +1,21 @@
+/* Profile Page */
+
+.profileForm {
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  padding-bottom: 30px; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logoutBtn__div {
+  width: 100%;
+  display: flex;
+  border-bottom: 1px solid #04aaff;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+}
+
+.logOut {
+  margin-top: 10px;
+}

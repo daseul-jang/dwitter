@@ -27,7 +27,11 @@ const dweetList = (setDweets) => {
 };
 
 const myDweets = (uid, setMyDweets) => {
-  const q = query(collRef, where("creatorId", "==", uid));
+  const q = query(
+    collRef,
+    where("creatorId", "==", uid),
+    orderBy("createdAt", "desc")
+  );
   onSnapshot(q, (snapshot) => {
     const myDweetArr = snapshot.docs.map((doc) => ({
       id: doc.id,

@@ -3,6 +3,7 @@ import { authService } from "firebaseService/fbauth";
 import { dbService } from "firebaseService/fbstore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "css/profile.css";
 
 function Profile({ userObj, refreshUser }) {
   const [newDisName, setNewDisName] = useState(userObj.displayName);
@@ -29,17 +30,28 @@ function Profile({ userObj, refreshUser }) {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form className="profileForm" onSubmit={onSubmit}>
         <input
+          className="formInput"
           onChange={onChange}
           value={newDisName}
           type="text"
           placeholder="Display name"
+          autoFocus
         />
-        <input type="submit" value="프로필 수정" />
+        <input
+          className="formBtn"
+          type="submit"
+          value="프로필 수정"
+          style={{ marginTop: 10 }}
+        />
       </form>
-      <button onClick={onLogoutClick}>로그아웃</button>
+      <div className="logoutBtn__div">
+        <span className="formBtn cancelBtn logOut" onClick={onLogoutClick}>
+          로그아웃
+        </span>
+      </div>
       {myDweets.map((dw) => (
         <Dweet
           key={dw.id}
@@ -47,7 +59,7 @@ function Profile({ userObj, refreshUser }) {
           isOwner={dw.creatorId === userObj.uid}
         />
       ))}
-    </>
+    </div>
   );
 }
 

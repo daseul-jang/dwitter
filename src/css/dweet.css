@@ -1,0 +1,49 @@
+/* Dweet */
+
+.dweetEdit .formBtn {
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.dweet {
+  margin-bottom: 20px;
+  background-color: white;
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  border: #04aaff solid 1px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.dweet h4 {
+  font-size: 14px;
+}
+
+.dweet img {
+  /* right: -10px;
+  top: 20px;
+  position: absolute; */
+  max-width: 270px;
+  max-height: 300px;
+  border-radius: 4%;
+  margin: 25px auto 5px auto;
+}
+
+.dweet__actions {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.dweet__actions span {
+  cursor: pointer;
+}
+
+.dweet__actions span:first-child {
+  margin-right: 10px;
+}

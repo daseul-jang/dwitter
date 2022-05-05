@@ -19,8 +19,17 @@ function App() {
     });
   };
 
+  const styleCenter = {
+    maxWidth: "890px",
+    width: "100%",
+    margin: "0 auto",
+    marginTop: "80px",
+    display: "flex",
+    justifyContent: "center",
+  };
+
   return (
-    <div className="App">
+    <div>
       {init ? (
         <AppRouter
           isLoggedIn={Boolean(userObj)}
@@ -29,9 +38,11 @@ function App() {
           init={init}
         />
       ) : (
-        "Initializing..."
+        <div style={styleCenter}>Initializing...</div>
       )}
-      <footer>&copy; {new Date().getFullYear()} Dwitter</footer>
+      <footer style={styleCenter}>
+        <span>&copy; {new Date().getFullYear()} Dwitter</span>
+      </footer>
     </div>
   );
 }
