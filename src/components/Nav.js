@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Nav() {
+function Nav({ userObj }) {
   return (
     <nav>
       <ul>
@@ -8,7 +8,7 @@ function Nav() {
           <Link to="/">Home</Link>
         </li>
         <li>
-          <Link to="/profile">Profile</Link>
+          <Link to="/profile">{userObj.displayName}의 Profile</Link>
         </li>
       </ul>
     </nav>

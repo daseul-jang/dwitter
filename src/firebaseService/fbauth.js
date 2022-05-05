@@ -8,13 +8,20 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 
 const auth = getAuth(app);
 
 const authStateChanged = (setUserObj, setIsInit) => {
   onAuthStateChanged(auth, (user) => {
-    user ? setUserObj(user) : setUserObj(null);
+    console.log(user);
+    user
+      ? setUserObj({
+          displayName: user.displayName,
+          uid: user.uid,
+        })
+      : setUserObj(null);
     setIsInit(true);
   });
 };
@@ -38,14 +45,22 @@ const socialLogin = (name) => {
   return signInWithPopup(auth, provider);
 };
 
+const profileUpdate = (newName) => {
+  return updateProfile(auth.currentUser, {
+    displayName: newName,
+  });
+};
+
 const logOut = () => {
   signOut(auth);
 };
 
 export const authService = {
+  auth,
   authStateChanged,
   createUser,
   signIn,
   socialLogin,
+  profileUpdate,
   logOut,
 };

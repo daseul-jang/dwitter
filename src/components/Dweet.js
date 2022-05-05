@@ -5,6 +5,7 @@ import { useState } from "react";
 function Dweet({ dweetObj, isOwner }) {
   const [edit, setEdit] = useState(false);
   const [newDw, setNewDw] = useState(dweetObj.text);
+
   const onDeleteClick = async () => {
     const ok = window.confirm("정말 삭제하시겠어요?");
 
@@ -16,7 +17,9 @@ function Dweet({ dweetObj, isOwner }) {
   };
 
   const toggleEdit = () => setEdit((prev) => !prev);
+
   const onEditChange = (event) => setNewDw(event.target.value);
+
   const onEditSubmit = async (event) => {
     event.preventDefault();
 
